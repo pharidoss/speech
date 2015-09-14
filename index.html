@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+
+        // Now we can start the speech recognition
+        // Supported only in Chrome
+        // Once started, you need to allow Chrome to use the microphone
+
+        var recognition = new webkitSpeechRecognition();
+
+        // Be default, Chrome will only return a single result.
+        // By enabling "continuous", Chrome will keep the microphone active.
+
+        recognition.continuous = true;
+
+        recognition.onresult = function(event) {
+
+            // Get the current result from the results object
+            var transcript = event.results[event.results.length-1][0].transcript;
+            $.ajax({
+                type: "POST",
+                url: //url to send to,
+                data: JSON.stringify({'speech':transcript}),
+                contentType: 'application/json;charset=UTF-8',
+                success: function(result){console.log(result);}
+            });
+
+            // Send the result string via WebSocket to the running Processing Sketch
+            console.log(transcript)
+            document.getElementById("demo").innerHTML = transcript;
+        }
+
+        // Start the recognition
+        recognition.start();
+
+</script>
+<style>
+p{
+    text-align: center;
+    font-size: 400%;
+}
+</style>
+</head>
+<body>
+<p id="demo"></p>
+</body>
+</html>
+
