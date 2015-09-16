@@ -1,4 +1,4 @@
-#WebkitSpeechRecogniion's Hello world
+#WebkitSpeechRecognition's Hello world
 
 ####Displays what is spoken into a microphone on a html page and if required does  HTTP POST to a predefined server link 
 run a simple server by 
